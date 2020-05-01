@@ -1100,6 +1100,44 @@
 
 // ? Вывод односвязного списка
 
+// let list = {
+// 	value: 1,
+// 	next: {
+// 		value: 2,
+// 		next: {
+// 			value: 3,
+// 			next: {
+// 				value: 4,
+// 				next: null
+// 			}
+// 		}
+// 	}
+// };
+
+
+// todo with loop
+
+// function printList(obj) {
+// 	while (obj) { // while not null
+// 		console.log(obj.value);
+// 		obj = obj.next;
+// 	}
+// }
+
+// todo recurcion
+
+// function printList(obj) {
+// 	console.log(obj.value);
+// 	if (obj.next) {
+// 		printList(obj.next);
+// 	}
+// }
+
+// printList(list);
+
+
+// ? Вывод односвязного списка в обратном порядке
+
 let list = {
 	value: 1,
 	next: {
@@ -1113,14 +1151,38 @@ let list = {
 		}
 	}
 };
+// todo recurcion
 
-// loop
+// function printList(obj) {
 
-function printList(obj) {
-	for (let value of obj) {
-		console.log(value);
-	}
-}
-printList(list);
+// 	if (obj.next) {
+// 		printList(obj.next);
+// 	}
+// 	console.log(obj.value);
+// }
+// printList(list);
 
-// ? Вывод односвязного списка в обратном порядке
+// todo with loop
+
+// function printList(obj) {
+// 	let arr = [];
+// 	let some = obj;
+
+// 	while (some) { // while not null
+// 		arr.push(some.value);
+// 		some = some.next;
+// 	}
+// 	for (let i = arr.length - 1; i >= 0; i--) {
+// 		console.log(arr[i]);
+// 	}
+// }
+// printList(list);
+
+// ! Замикання 
+
+//? Сумма с помощью замыканий
+
+function sum(a) { return (b) => a + b; }
+
+console.log(sum(2)(4));
+console.log(sum(-10)(14));
