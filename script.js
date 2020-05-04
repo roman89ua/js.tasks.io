@@ -80,6 +80,7 @@
 
 
 // !
+
 // function ask(question, yes, no) {
 //   if (confirm(question)) yes()
 //   else no();
@@ -187,7 +188,6 @@
 
 
 // ! Symbol
-
 
 // let menu = {
 // 	width: 200,
@@ -317,6 +317,7 @@
 
 
 // ?Почему 6.35.toFixed(1) == 6.3?.
+
 // let num = 6.35;
 // let numLong = num.toFixed(25);
 // console.log(numLong);
@@ -333,6 +334,7 @@
 // readNumber();
 
 // ? Бесконечный цикл по ошибке
+
 // let i = 0;
 // while (i != 10) {
 //   i += 0.2;
@@ -406,7 +408,6 @@
 // 	return +str;
 // }
 
-
 // console.log(extractCurrencyValue('$120') === 120);
 // console.log(extractCurrencyValue('120') === 120);
 // console.log(extractCurrencyValue('$5') === 5);
@@ -458,7 +459,6 @@
 
 // sumInput();
 
-
 // ? Подмассив наибольшей суммы
 
 // function getMaxSubSum(arr) {
@@ -483,7 +483,6 @@
 // ! Методы массивов
 
 // ? Переведите текст вида border-left-width в borderLeftWidth
-
 
 // function camelize(str) {
 
@@ -520,7 +519,6 @@
 // alert(arr); 
 
 // ?Фильтрация по диапазону "на месте"
-
 
 // function filterRangeInPlace(array, a, b) {
 // 	for (let i = 0; i < array.length; i++) {
@@ -800,7 +798,7 @@
 // 		//number++;
 // 	//}
 // 	//return number;
-// 	 //? or
+// 	// or
 // 	return Object.keys(obj).length;
 // }
 //
@@ -810,6 +808,7 @@
 // };
 //
 // console.log(count(user));
+
 // ! Деструктурирующее присваивание
 
 // ? Деструктурирующее присваивание
@@ -856,6 +855,7 @@
 
 
 // ? Создайте дату
+
 // Создайте объект Date для даты: 20 февраля 2012 года, 3 часа 12 минут.
 // let someDate = new Date(2012, 1, 20, 3, 12);
 // alert(someDate);
@@ -902,9 +902,7 @@
 
 // console.log(getLocalDay(date));       // вторник, нужно показать 2
 
-
 // ? Какой день месяца был много дней назад?
-
 
 // let date = new Date(2012, 2, 1);
 
@@ -925,7 +923,6 @@
 // console.log(getDateAgo(date, -28)); // 29, 
 // console.log(getDateAgo(date, 2)); // 28, 
 // console.log(getDateAgo(date, 365)); // 2, 
-
 
 // ? Последнее число месяца?
 
@@ -991,6 +988,7 @@
 // ! Формат JSON, метод toJSON
 
 // ? Преобразуйте объект в JSON, а затем обратно в обычный объект
+
 // let user = {
 // 	name: "Василий Иванович",
 // 	age: 35
@@ -1002,8 +1000,6 @@
 
 // let newUser = JSON.parse(json);
 // console.log("newUser: ", newUser);
-
-
 
 // ? Исключить обратные ссылки
 
@@ -1030,6 +1026,7 @@
 // ! Рекурсия и стек
 
 // ? Вычислить сумму чисел до данного
+
 // ! max numbers of recurcion = 21471;
 // #1 loop
 
@@ -1138,19 +1135,19 @@
 
 // ? Вывод односвязного списка в обратном порядке
 
-let list = {
-	value: 1,
-	next: {
-		value: 2,
-		next: {
-			value: 3,
-			next: {
-				value: 4,
-				next: null
-			}
-		}
-	}
-};
+// let list = {
+// 	value: 1,
+// 	next: {
+// 		value: 2,
+// 		next: {
+// 			value: 3,
+// 			next: {
+// 				value: 4,
+// 				next: null
+// 			}
+// 		}
+// 	}
+// };
 // todo recurcion
 
 // function printList(obj) {
@@ -1182,7 +1179,74 @@ let list = {
 
 //? Сумма с помощью замыканий
 
-function sum(a) { return (b) => a + b; }
+// function sum(a) { return (b) => a + b; }
 
-console.log(sum(2)(4));
-console.log(sum(-10)(14));
+// console.log(sum(2)(4));
+// console.log(sum(-10)(14));
+
+
+// ?Фильтрация с помощью функции
+
+// function inBetween(a, b) {
+// 	return (arg) => arg >= a && arg <= b;
+// }
+// function inArray(array) {
+// 	return (arg) => array.includes(arg);
+// }
+// /* .. ваш код для  и inArray */
+// let arr = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+// // console.log(arr.filter((number) => number >= 3 && number <= 6));
+// console.log(arr.filter(inBetween(3, 6))); // 3,4,5,6
+// // console.log(arr.filter((number) => number == -5 || number == 1 || number == 2 || number == 10));
+// console.log(arr.filter(inArray([-5, 1, 2, 10]))); // -5,1,2,10
+
+
+// ? Сортировать по полю 
+
+// function byField(str) {
+// 	return (a, b) => (a[str] > b[str]) ? 1 : -1;
+// }
+
+// let users = [
+// 	{ name: "John", age: 20, surname: "Johnson" },
+// 	{ name: "Pete", age: 18, surname: "Peterson" },
+// 	{ name: "Ann", age: 19, surname: "Hathaway" }
+// ];
+// // console.log(users[0].name)
+// // console.log(users.sort((a, b) => a.name > b.name ? 1 : -1));
+// let byName = [...users.sort(byField('name'))];
+// let byAge = [...users.sort(byField('age'))];
+// let bySurname = [...users.sort(byField('surname'))];
+
+// console.log('byName', byName);
+// console.log('byAge', byAge);
+// console.log('bySurname', bySurname);
+
+
+// ?  Армия функций
+
+// function makeArmy() {
+// 	let shooters = [];
+
+// 	for (let i = 0; i < 10; i++) {
+// 		let shooter = function () { // функция shooter
+// 			console.log(i); // должна выводить порядковый номер
+// 		};
+// 		shooters.push(shooter);
+// 	}
+// 	return shooters;
+// }
+
+// let army = makeArmy();
+
+// army[0]();
+// army[1]();
+// army[2]();
+// army[3]();
+// army[4]();
+// army[5]();
+// army[6]();
+// army[7]();
+// army[8]();
+// army[9]();
