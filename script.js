@@ -1250,3 +1250,123 @@
 // army[7]();
 // army[8]();
 // army[9]();
+
+// ? Установка и уменьшение значения счётчика
+
+// function makeCounter() {
+// 	let count = 0;
+
+// 	function pox() {
+// 		return ++count;
+// 	}
+// 	pox.set = function (val) {
+// 		return count = val - 1;
+// 	}
+
+// 	pox.decrease = function () {
+// 		return count -= 1;
+// 	}
+
+// 	return pox;
+// }
+
+// let counter = makeCounter();
+
+// console.log(counter());// 0
+// console.log(counter());// 1
+// console.log(counter());// 2
+// console.log(counter());// 3
+// console.log(counter());// 4
+// console.log(counter());// 5
+
+// counter.set(10); // установить новое значение счётчика
+
+// console.log(counter()); // 10
+
+// counter.decrease(); // уменьшить значение счётчика на 1
+// counter.decrease(); // уменьшить значение счётчика на 1
+// counter.decrease(); // уменьшить значение счётчика на 1
+// counter.decrease(); // уменьшить значение счётчика на 1
+// counter.decrease(); // уменьшить значение счётчика на 1
+// counter.decrease(); // уменьшить значение счётчика на 1
+
+// console.log(counter()); // 10 (вместо 11)
+
+// ? Сумма с произвольным количеством скобок
+
+
+// function sum(firstArg) {
+// 	let summ = firstArg;
+
+// 	function addNextArg(next) {
+// 		summ += next;
+// 		return addNextArg;
+// 	}
+
+// 	addNextArg.toString = function () {
+// 		return summ;
+// 	}
+
+// 	return addNextArg;
+// }
+
+// alert(sum(1)(2));
+// alert(sum(1)(2)(3));
+// alert(sum(5)(-1)(2));
+// alert(sum(6)(-1)(-2)(-3));
+// alert(sum(0)(1)(2)(3)(4)(5));
+
+// ? Планирование: setTimeout и setInterval
+
+// todo setInterval
+
+// function printNumbers(from, to) {
+// 	let fm = from;
+
+// 	let toStop = setInterval(() => {
+// 		console.log(fm++);
+// 		if (fm > to) {
+// 			clearInterval(toStop);
+// 			console.log('stop');
+// 		}
+// 	}, 1000);
+// }
+
+// printNumbers(1, 5);
+
+// todo Рекурсивный setTimeout
+
+// function printNumbers(from, to) {
+// 	let fm = from;
+
+// 	let toStop = setTimeout(function nextStep() {
+// 		console.log(fm++);
+// 		toStop = setTimeout(nextStep, 1000);
+// 		if (fm > to) {
+// 			clearTimeout(toStop);
+// 			console.log('stop');
+// 		}
+// 	}, 1000);
+// }
+
+// printNumbers(1, 5);
+
+// ! Декораторы и переадресация вызова, сall/apply
+
+// ? Декоратор-шпион
+
+function work(a, b) {
+	alert(a + b); // произвольная функция или метод
+}
+function spy(func) {
+
+}
+
+work = spy(work);
+
+work(1, 2); // 3
+work(4, 5); // 9
+
+for (let args of work.calls) {
+	alert('call:' + args.join()); // "call:1,2", "call:4,5"
+}
