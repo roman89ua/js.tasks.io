@@ -1448,35 +1448,35 @@ function work(a, b) {
 //   console.log(a)
 // }
 
-function throttle(func, ms) {
+// function throttle(func, ms) {
 
-	let isThrottled = false,
-		savedArgs,
-		savedThis;
+// 	let isThrottled = false,
+// 		savedArgs,
+// 		savedThis;
 
-	function wrapper() {
+// 	function wrapper() {
 
-		if (isThrottled) { // (2)
-			savedArgs = arguments;
-			savedThis = this;
-			return;
-		}
+// 		if (isThrottled) { // (2)
+// 			savedArgs = arguments;
+// 			savedThis = this;
+// 			return;
+// 		}
 
-		func.apply(this, arguments); // (1)
+// 		func.apply(this, arguments); // (1)
 
-		isThrottled = true;
+// 		isThrottled = true;
 
-		setTimeout(function () {
-			isThrottled = false; // (3)
-			if (savedArgs) {
-				wrapper.apply(savedThis, savedArgs);
-				savedArgs = savedThis = null;
-			}
-		}, ms);
-	}
+// 		setTimeout(function () {
+// 			isThrottled = false; // (3)
+// 			if (savedArgs) {
+// 				wrapper.apply(savedThis, savedArgs);
+// 				savedArgs = savedThis = null;
+// 			}
+// 		}, ms);
+// 	}
 
-	return wrapper;
-}
+// 	return wrapper;
+// }
 
 // // f1000 передаёт вызовы f максимум раз в 1000 мс
 // let f1000 = throttle(f, 1000);
