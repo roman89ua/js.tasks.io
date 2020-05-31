@@ -1354,19 +1354,151 @@
 // ! Декораторы и переадресация вызова, сall/apply
 
 // ? Декоратор-шпион
+function poop() {
+	return 1;
+}
 
 function work(a, b) {
-	alert(a + b); // произвольная функция или метод
-}
-function spy(func) {
-
+	console.log('result of main function - ', a + b);
 }
 
-work = spy(work);
+// function spy(func) {
 
-work(1, 2); // 3
-work(4, 5); // 9
+// 	function someFunc(...arg) {
+// 		someFunc.calls.push(arg);
 
-for (let args of work.calls) {
-	alert('call:' + args.join()); // "call:1,2", "call:4,5"
-}
+// 		return func.apply(this, arguments);
+// 	}
+// 	someFunc.calls = [];
+// 	return someFunc;
+// }
+
+// work = spy(work);
+
+// work(1, 2); // 3
+// work(4, 5); // 9
+
+// for (let args of work.calls) {
+// 	console.log('call:' + args.join()); // "call:1,2", "call:4,5"
+// }
+
+//  ? Задерживающий декоратор
+
+// function f(x) {
+// 	console.log(x);
+// }
+
+// // function delay(func, ms) {
+// // 	function timer(...arg) {
+// // 		function doingStaff() {
+// // 			func.apply(timer, arg)
+// // 		}
+// // 		setTimeout(doingStaff, ms);
+// // 	}
+// // 	return timer;
+// // }
+
+// function delay(func, ms) {
+// 	function timer() {
+// 		return setTimeout(() => func.apply(this, arguments), ms);
+// 	}
+// 	return timer;
+// }
+
+// // создаём обёртки
+// let f1000 = delay(f, 1000);
+// let f1500 = delay(f, 3000);
+
+// f1000("test1", 'test3'); // показывает "test" после 1000 мс
+// f1500("test2"); // показывает "test" после 1500 мс
+
+// ? Декоратор debounce
+
+// function debounce(func, ms) {
+// 	let youCanNotPass = false;
+
+// 	return function () {
+// 		if (youCanNotPass) {
+// 			console.log(this)
+// 			return this;
+// 		}
+
+// 		func.apply(this, arguments);
+// 		youCanNotPass = true;
+
+
+// 		setTimeout(() => youCanNotPass = false, ms);
+// 	}
+
+// }
+
+
+// let f = debounce(alert, 1000);
+
+// f(1); // выполняется немедленно
+// f(2); // проигнорирован
+
+// setTimeout(() => f(3), 100); // проигнорирован (прошло только 100 мс)
+// setTimeout(() => f(4), 1100); // выполняется
+// setTimeout(() => f(5), 1500); // проигнорирован (прошло только 400 мс от последнего вызова)
+
+// ? Тормозящий (throttling) декоратор
+
+// function f(a) {
+//   console.log(a)
+// }
+
+// // f1000 передаёт вызовы f максимум раз в 1000 мс
+// let f1000 = throttle(f, 1000);
+
+// f1000(1); // показывает 1
+// f1000(2); // (ограничение, 1000 мс ещё нет)
+// f1000(3); // (ограничение, 1000 мс ещё нет)
+
+// // когда 1000 мс истекли ...
+// // ...выводим 3, промежуточное значение 2 было проигнорировано
+
+
+// ! Привязка контекста к функции
+
+// ? Исправьте функцию, теряющую "this"
+
+// function askPassword(ok, fail) {
+// 	let password = prompt("Password?", '');
+// 	if (password == "rockstar") ok();
+// 	else fail();
+// }
+
+// let user = {
+// 	name: 'Вася',
+
+// 	loginOk() {
+// 		alert(`${this.name} logged in`);
+// 	},
+
+// 	loginFail() {
+// 		alert(`${this.name} failed to log in`);
+// 	},
+
+// };
+
+// //askPassword(user.loginOk, user.loginFail);
+// askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
+
+// ? Использование частично применённой функции для логина
+
+// function askPassword(ok, fail) {
+// 	let password = prompt("Password?", '');
+// 	if (password == "rockstar") ok();
+// 	else fail();
+// }
+
+// let user = {
+// 	name: 'John',
+
+// 	login(result) {
+// 		alert(this.name + (result ? ' logged in' : ' failed to log in'));
+// 	}
+// };
+// //  askPassword(?, ?);
+// askPassword(user.login.bind(user, true), user.login.bind(user, false)) 
