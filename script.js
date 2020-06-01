@@ -1532,3 +1532,142 @@ function work(a, b) {
 // };
 // //  askPassword(?, ?);
 // askPassword(user.login.bind(user, true), user.login.bind(user, false)) 
+
+
+// ! Прототипное наследование
+
+// ? Работа с прототипами
+
+// let animal = {
+// 	jumps: null
+// };
+// let rabbit = {
+// 	__proto__: animal,
+// 	jumps: true
+// };
+
+// alert(rabbit.jumps); // ? (1) 
+// // true
+
+// delete rabbit.jumps;
+
+// alert(rabbit.jumps); // ? (2)
+// // null
+
+// delete animal.jumps;
+
+// alert(rabbit.jumps); // ? (3)
+// // undefind
+
+// ? Алгоритм поиска
+
+// let head = {
+// 	glasses: 1
+// };
+
+// let table = {
+// 	pen: 3
+// };
+
+// let bed = {
+// 	sheet: 1,
+// 	pillow: 2
+// };
+
+// let pockets = {
+// 	money: 2000
+// };
+
+// // todo 1.
+
+// pockets.__proto__ = bed;
+// bed.__proto__ = table;
+// table.__proto__ = head;
+
+// // console.log(pockets.pen); // 3
+// // console.log(bed.glasses); // 1
+
+
+// // todo 2.
+// function longWay() {
+// 	let start = new Date();
+// 	console.log(pockets.glasses);
+// 	let end = new Date();
+// 	console.log((end - start) / 1000, 'sec');
+
+// }
+
+// function shortWay() {
+// 	let start = new Date();
+// 	console.log(head.glasses);
+// 	let end = new Date();
+// 	console.log((end - start) / 1000, 'sec');
+// }
+
+
+
+// 	//todo pockets.glasses
+// 	//todo head.glasses
+
+// longWay() // 0.005 sec
+// shortWay() //0.001 sec
+
+// ? Куда будет произведена запись?
+
+// let animal = {
+// 	eat() {
+// 		this.full = true;
+// 	}
+// };
+
+// let rabbit = {
+// 	__proto__: animal
+// };
+
+// rabbit.eat();
+
+// rabbit.__proto__ = null;
+// console.log(rabbit.full);
+// //todo answer is "to rabbit";
+
+
+// ? Почему наедаются оба хомяка?
+
+
+// let hamster = {
+// 	stomach: [],
+
+// 	eat(food) {
+// 		this.stomach = [...this.stomach, food];   //  ? fix #1
+// 	}
+// };
+
+// let speedy = {
+// 	__proto__: hamster
+// };
+
+// let lazy = {
+// 	__proto__: hamster
+// };
+
+// // ? fix #2
+// // or we can give stomach for each hamsteres  
+// // speedy.stomach = [];
+// // lazy.stomach = [];
+
+// // todo Этот хомяк нашёл еду
+
+// speedy.eat("apple");
+// console.log(speedy.stomach); // apple
+
+
+// // todo У этого хомяка тоже есть еда. Почему? Исправьте
+// console.log(lazy.stomach); // apple
+// // answer
+// // becouse they have one stomach for two hamsteres
+
+
+
+
+
+
