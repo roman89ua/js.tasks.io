@@ -1594,7 +1594,6 @@ function work(a, b) {
 // 	console.log(pockets.glasses);
 // 	let end = new Date();
 // 	console.log((end - start) / 1000, 'sec');
-
 // }
 
 // function shortWay() {
@@ -1603,8 +1602,6 @@ function work(a, b) {
 // 	let end = new Date();
 // 	console.log((end - start) / 1000, 'sec');
 // }
-
-
 
 // 	//todo pockets.glasses
 // 	//todo head.glasses
@@ -1666,8 +1663,87 @@ function work(a, b) {
 // // answer
 // // becouse they have one stomach for two hamsteres
 
+// !  F.prototype
 
+// ? Изменяем "prototype"
 
+// 1. true
+// 2. false
+// 3. true
+// 4. undefind
 
+// ? Создайте новый объект с помощью уже существующего
+
+// function Rabbit(name) {
+// 	this.name = name;
+// }
+
+// let rabbit = new Rabbit('boris');
+// console.log(rabbit.name); //bob
+// let rabbit2 = new rabbit.constructor('bob');
+// console.log(rabbit2.name); //bob
+
+// ! Встроенные прототипы
+
+// ? Добавить функциям метод "f.defer(ms)"
+// Function.prototype.defer = function (ms, a) {
+// 	setTimeout(() => this(a), ms);
+// }
+
+// function add(a) {
+// 	console.log(a);
+// }
+// function f() {
+// 	console.log("Hello!");
+// }
+
+// f.defer(3000); // выведет "Hello!" через 1 секунду
+// add.defer(1500, 'Some string to show!');// Some string to show!
+
+// ? Добавьте функциям декорирующий метод "defer()"
+
+// Function.prototype.defer = function (ms) {
+// // my answer
+// 	return (...args) => setTimeout(() => this(...args), ms); 
+//  // todo book answer
+// 	// let firstThis = this;
+// 	// return function (...args) {
+// 	// 	setTimeout(() => firstThis.apply(this, args), ms);
+// 	// }
+// }
+
+// function f(a, b) {
+// 	alert(a + b);
+// }
+
+// f.defer(2000)(1, 2); // выведет 3 через 1 секунду.
+
+// ! Методы прототипов, объекты без свойства __proto__
+
+// ? Добавьте toString в словарь
+
+// let dictionary = Object.create(null);
+
+// // todo   my code
+// dictionary.toString = function getAllKeys() {
+// 	return Object.keys(this).join(',');
+// }
+
+// Object.defineProperty(dictionary, "toString", {
+// 	enumerable: false
+// });
+// // todo   end of my code
+
+// // добавляем немного данных
+// dictionary.apple = "Apple";
+// dictionary.__proto__ = "test"; // здесь __proto__ -- это обычный ключ
+
+// // только apple и __proto__ выведены в цикле
+// for (let key in dictionary) {
+// 	console.log(key); // "apple", затем "__proto__"
+// }
+
+// // ваш метод toString в действии
+// alert(dictionary); // "apple,__proto__"
 
 
