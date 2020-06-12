@@ -1355,11 +1355,11 @@
 
 // ? Декоратор-шпион
 function poop() {
-	return 1;
+    return 1;
 }
 
 function work(a, b) {
-	console.log('result of main function - ', a + b);
+    console.log('result of main function - ', a + b);
 }
 
 // function spy(func) {
@@ -1761,3 +1761,167 @@ function work(a, b) {
 // Rabbit.prototype.sayHi(); // undefined
 // Object.getPrototypeOf(rabbit).sayHi(); // undefined
 // rabbit.__proto__.sayHi(); // undefined
+
+
+// ! Классы
+
+// ! Класс: базовый синтаксис
+
+// ? Перепишите класс
+
+// class Clock {
+
+//     constructor({ template }) {
+//         this.template = template;
+//     }
+
+//     render() {
+
+//         let date = new Date();
+
+//         let hours = date.getHours();
+//         if (hours < 10) hours = '0' + hours;
+
+//         let mins = date.getMinutes();
+//         if (mins < 10) mins = '0' + mins;
+
+//         let secs = date.getSeconds();
+//         if (secs < 10) secs = '0' + secs;
+
+//         let output = this.template
+//             .replace('h', hours)
+//             .replace('m', mins)
+//             .replace('s', secs);
+
+//         console.log(output);
+
+//     }
+
+//     stop() {
+//         clearInterval(this.timer);
+//     };
+//     start() {
+//         this.render();
+//         this.timer = setInterval(() => this.render(), 1000);
+//     };
+// }
+
+// let clock = new Clock({ template: 'h:m:s' });
+// clock.start();
+
+// ! Наследование классов
+
+// ? Ошибка создания экземпляра класса
+
+// class Animal {
+
+//     constructor(name) {
+//         this.name = name;
+//     }
+
+// }
+
+// class Rabbit extends Animal {
+//     constructor(name) {
+//         super(name);
+//         this.created = Date.now();
+//     }
+// }
+
+// let rabbit = new Rabbit("Белый кролик"); // Error: this is not defined
+// console.log(rabbit.name);
+
+// ? Улучшенные часы
+
+// class Clock {
+//     constructor({ template }) {
+//         this.template = template;
+//     }
+
+//     render() {
+//         let date = new Date();
+
+//         let hours = date.getHours();
+//         if (hours < 10) hours = '0' + hours;
+
+//         let mins = date.getMinutes();
+//         if (mins < 10) mins = '0' + mins;
+
+//         let secs = date.getSeconds();
+//         if (secs < 10) secs = '0' + secs;
+
+//         let output = this.template
+//             .replace('h', hours)
+//             .replace('m', mins)
+//             .replace('s', secs);
+
+//         console.log(output);
+//     }
+
+//     stop() {
+//         clearInterval(this.timer);
+//     }
+
+//     start() {
+//         this.render();
+//         this.timer = setInterval(() => this.render(), 1000);
+//     }
+// }
+// class ExtendedClock extends Clock {
+//     constructor(option) {
+//         super(option);
+//         let { precision = 1000 } = option;
+//         this.precision = precision;
+//     }
+
+//     start() {
+//         this.render();
+//         this.timer = setInterval(() => this.render(), this.precision);
+//     }
+// };
+// let s = new ExtendedClock({
+//     template: 'h:m:s',
+//     precision: 10000
+// });
+// s.start();
+
+
+
+// ! Статические свойства и методы
+
+// ? Класс расширяет объект?
+
+// class Rabbit extends Object {
+//     constructor(name) {
+//         super();
+//         this.name = name;
+//     }
+// }
+
+// let rabbit = new Rabbit("Кроль");
+
+// alert(rabbit.hasOwnProperty('name')); // Ошибка
+
+// ! Обработка ошибок
+// !Обработка ошибок, "try..catch"
+
+// ! Пользовательские ошибки, расширение Error
+
+// ? Наследование от SyntaxError
+
+class FormatError extends SyntaxError {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+
+    }
+}
+
+let err = new FormatError("ошибка форматирования");
+
+alert(err.message); // ошибка форматирования
+alert(err.name); // FormatError
+alert(err.stack); // stack
+
+alert(err instanceof FormatError); // true
+alert(err instanceof SyntaxError); // true (потому что наследует от SyntaxError)
