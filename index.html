@@ -7,10 +7,23 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<link rel="stylesheet" href="style.css">
+	<style>
+		.circle {
+			transition-property: width, height, margin-left, margin-top;
+			transition-duration: 2s;
+			position: fixed;
+			transform: translateX(-50%) translateY(-50%);
+			background-color: red;
+			border-radius: 50%;
+		}
+	</style>
 </head>
 
 <body>
 	<script src="script.js"></script>
+	<button onclick="showCircle(150, 150, 100)">showCircle(150,
+		150, 100)</button>
+
 </body>
 
 </html>
