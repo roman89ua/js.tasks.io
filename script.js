@@ -1928,6 +1928,8 @@ function work(a, b) {
 
 
 // !!! Промисы, async/await
+
+// ! Анимация круга с помощью колбэка
 function start() {
     showCircle(150, 150, 100, (domELement) => {
         let p = document.createElement('p');
@@ -1957,7 +1959,3 @@ function showCircle(cx, cy, radius, callback) {
         callback(div);
     });
 }
-
-
-
-// ! Анимация круга с помощью колбэка
