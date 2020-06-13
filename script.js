@@ -121,7 +121,6 @@
 // let p = Object.assign({}, o, r);
 
 // !
-
 // let user = {};
 // console.log(user);
 
@@ -1909,19 +1908,25 @@ function work(a, b) {
 
 // ? Наследование от SyntaxError
 
-class FormatError extends SyntaxError {
-    constructor(message) {
-        super(message);
-        this.name = this.constructor.name;
+// class FormatError extends SyntaxError {
+//     constructor(message) {
+//         super(message);
+//         this.name = this.constructor.name;
 
-    }
-}
+//     }
+// }
 
-let err = new FormatError("ошибка форматирования");
+// let err = new FormatError("ошибка форматирования");
 
-alert(err.message); // ошибка форматирования
-alert(err.name); // FormatError
-alert(err.stack); // stack
+// alert(err.message); // ошибка форматирования
+// alert(err.name); // FormatError
+// alert(err.stack); // stack
 
-alert(err instanceof FormatError); // true
-alert(err instanceof SyntaxError); // true (потому что наследует от SyntaxError)
+// alert(err instanceof FormatError); // true
+// alert(err instanceof SyntaxError); // true (потому что наследует от SyntaxError)
+
+
+
+// !!! Промисы, async/await
+
+// ! Анимация круга с помощью колбэка
