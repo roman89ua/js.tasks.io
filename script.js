@@ -1930,32 +1930,96 @@ function work(a, b) {
 // !!! Промисы, async/await
 
 // ! Анимация круга с помощью колбэка
-function start() {
-    showCircle(150, 150, 100, (domELement) => {
-        let p = document.createElement('p');
-        let text = document.createTextNode('Hello, world!');
-        p.appendChild(text);
-        domELement.appendChild(p);
-        domELement.classList.add('message-ball');
-        p.classList.add('forP');
-    });
-}
+// function start() {
+//     showCircle(150, 150, 100, (domELement) => {
+//         let p = document.createElement('p');
+//         let text = document.createTextNode('Hello, world!');
+//         p.appendChild(text);
+//         domELement.appendChild(p);
+//         domELement.classList.add('message-ball');
+//         p.classList.add('forP');
+//     });
+// }
 
-function showCircle(cx, cy, radius, callback) {
-    let div = document.createElement('div');
-    div.style.width = 0;
-    div.style.height = 0;
-    div.style.left = cx + 'px';
-    div.style.top = cy + 'px';
-    div.className = 'circle';
-    document.body.append(div);
+// function showCircle(cx, cy, radius, callback) {
+//     let div = document.createElement('div');
+//     div.style.width = 0;
+//     div.style.height = 0;
+//     div.style.left = cx + 'px';
+//     div.style.top = cy + 'px';
+//     div.className = 'circle';
+//     document.body.append(div);
 
-    setTimeout(() => {
-        div.style.width = radius * 2 + 'px';
-        div.style.height = radius * 2 + 'px';
-    }, 100);
-    div.addEventListener('transitionend', function handler() {
-        div.removeEventListener('transitionend', handler);
-        callback(div);
-    });
-}
+//     setTimeout(() => {
+//         div.style.width = radius * 2 + 'px';
+//         div.style.height = radius * 2 + 'px';
+//     }, 100);
+//     div.addEventListener('transitionend', function handler() {
+//         div.removeEventListener('transitionend', handler);
+//         callback(div);
+//     });
+// }
+
+// ! Promise
+
+// ? Можно ли "перевыполнить" промис?
+
+// let promise = new Promise(function (resolve, reject) {
+//     resolve(1);
+
+//     setTimeout(() => resolve(2), 1000);
+// });
+
+// promise.then(alert);
+// //   answer is 1 only; second resolve will be ignored
+
+// ?Задержка на промисах
+// function delay(ms) {
+//     // ваш код
+//     return new Promise(function (resolve) {
+//         let start = +new Date() + ms;
+//         console.log(start);
+//         while (start > +new Date()) { }
+//         resolve();
+//     })
+// }
+
+// delay(3000).then(() => console.log('выполнилось через 3 секунды'));
+
+// ? Animated circle with promise
+
+// function showCircle(cx, cy, radius) {
+
+//     let div = document.createElement('div');
+//     div.style.width = 0;
+//     div.style.height = 0;
+//     div.style.left = cx + 'px';
+//     div.style.top = cy + 'px';
+//     div.className = 'circle';
+//     document.body.append(div);
+
+//     return new Promise(function (resolve) {
+//         setTimeout(() => {
+//             div.style.width = radius * 2 + 'px';
+//             div.style.height = radius * 2 + 'px';
+//         }, 100);
+
+//         div.addEventListener('transitionend', function handler() {
+//             div.removeEventListener('transitionend', handler);
+//         });
+//         resolve(div);
+//     })
+// }
+// function start() {
+//     showCircle(150, 150, 100)
+//         .then((domELement) => {
+//             setTimeout(() => {
+//                 let p = document.createElement('p');
+//                 let text = document.createTextNode('Hello, world!');
+//                 p.appendChild(text);
+//                 domELement.appendChild(p);
+//                 domELement.classList.add('message-ball');
+//                 p.classList.add('forP');
+//             }, 2200);
+//         });
+// }
