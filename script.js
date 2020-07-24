@@ -2023,3 +2023,297 @@ function work(a, b) {
 //             }, 2200);
 //         });
 // }
+
+
+// ! Промисы: обработка ошибок
+
+// ? call to my github account and get my picture and my user.name
+// async function start() {
+//     let promise = await fetch("https://api.github.com/users/roman89ua", {
+//         method: 'GET'
+//     });
+//     let result = await promise.json();
+//     let img = document.createElement('img');
+//     let div = document.querySelector('div');
+//     let h1 = document.createElement('h1');
+//     let h1Text = document.createTextNode(result.name)
+//     div.appendChild(h1);
+//     h1.appendChild(h1Text);
+//     div.append(img);
+//     img.style = 'width:500px';
+//     // выводим на экран
+//     img.src = result.avatar_url;
+// }
+
+// ! Async/await
+// ?Перепишите, используя async/await
+
+// async function loadJson(url) {
+//     let response = await fetch(url)
+
+//     if (response.status == 200) {
+//         let json = response.json();
+//     }
+//     throw new Error(response.status);
+
+
+// }
+
+// loadJson('no-such-user.json') // (3)
+//     .catch(alert); // Error: 404
+
+// ? Перепишите, используя async/await
+
+// class HttpError extends Error {
+//     constructor(response) {
+//         super(`${response.status} for ${response.url}`);
+//         this.name = 'HttpError';
+//         this.response = response;
+//     }
+// }
+
+// async function loadJson(url) {
+//     let response = await fetch(url);
+//     if (response.status == 200) {
+//         return response.json();
+
+//     } else {
+//         throw new HttpError(response);
+//     }
+// }
+
+// async function demoGithubUser() {
+//     let name = prompt("Введите логин?", "roman89ua");
+//     let user = await loadJson(`https://api.github.com/users/${name}`);
+
+//     return user;
+// }
+
+// demoGithubUser().then(user => {
+//     alert(`Полное имя: ${user.name}.`)
+//     return user;
+// }).then(user => {
+//     let img = document.createElement('img');
+//     let div = document.createElement('div');
+//     let h1 = document.createElement('h1');
+//     let h1Text = document.createTextNode(user.name)
+//     let body = document.querySelector('body');
+//     body.appendChild(div);
+//     div.appendChild(h1);
+//     h1.appendChild(h1Text);
+//     div.append(img);
+//     img.style = 'width:500px';
+//     img.src = user.avatar_url;
+
+// })
+//     .catch(err => {
+//         if (err instanceof HttpError && err.response.status == 404) {
+//             alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
+//             return demoGithubUser();
+//         } else {
+//             throw err;
+//         }
+//     });
+// demoGithubUser();
+// ? Вызовите async–функцию из обычной"
+
+// async function wait() {
+//     await new Promise(resolve => setTimeout(resolve, 1000));
+
+//     return 10;
+// }
+
+// function f() {
+//     return wait().then(console.log);
+// }
+// console.log(f());
+
+// ! Генераторы, продвинутая итерация
+
+// function* strGenerator() {
+//     yield 'h'
+//     yield 'e'
+//     yield 'l'
+//     yield 'l'
+//     yield 'o'
+
+// }
+// const str = strGenerator();
+// console.log(str.next());
+// console.log(str.next());
+// console.log(str.next());
+// console.log(str.next());
+// console.log(str.next());
+// console.log(str.next());
+
+
+
+// function* numGenerator(n = 10) {
+//     for (let i = 0; i < n; i++) {
+//         yield i;
+//     }
+// }
+// const numbers = numGenerator(5);
+
+
+// const iterator = {
+//     [Symbol.iterator](n = 5) {
+//         let i = 0;
+//         return {
+//             next() {
+//                 if (i < n) {
+//                     return { value: ++i, done: false }
+//                 }
+//                 return { value: undefined, done: true }
+//             }
+//         }
+//     }
+// }
+// for (let k of iterator) {
+//     console.log(k);
+// }
+
+// function* gen(n = 10) {
+//     for (let i = 0; i < n; i++) {
+//         yield i;
+//     }
+// }
+// for (let k of gen(15)) {
+//     console.log(k);
+// }
+
+// ! Генераторы
+// function* pseudoRandom(seed) {
+//     let previous = seed;
+//     while (true) {
+//         let next = previous * 16807 % 2147483647
+//         yield next;
+//         previous = next;
+//     }
+
+// }
+
+// let generator = pseudoRandom(1);
+
+// alert(generator.next().value); // 16807
+// alert(generator.next().value); // 282475249
+// alert(generator.next().value); // 1622650073
+
+// ! Proxy и Reflect
+
+// ? Ошибка при чтении несуществующего свойства
+// let user = {
+//     name: "John"
+// };
+
+// function wrap(target) {
+//     return new Proxy(target, {
+//         get(target, prop) {
+//             if (!target.hasOwnProperty(prop)) {
+//                 return new Error(`No such property at this object!`);
+//             }
+//             return Reflect.get(target, prop);
+//         }
+//     });
+// }
+
+// user = wrap(user);
+
+// alert(user.name); // John
+// alert(user.age); // Ошибка: такого свойства не существует
+
+// ? Получение элемента массива с отрицательной позиции
+// let array = [1, 2, 3];
+
+
+// array = new Proxy(array, {
+//     get(target, index) {
+//         if (index < 0) {
+//             return target[target.length + Number(index)];
+//         }
+//         return target[index];
+//     }
+// });
+
+// console.log(array[-1]); //3
+// console.log(array[-2]); //2
+// console.log(array[-3]); //1
+// console.log(array[2]); //3
+
+// ? Observable
+function makeObservable(target) {
+    let result;
+    target.observe = function (func) {
+        return result = func;
+    }
+    return new Proxy(target, {
+        set(target, prop, value) {
+            return result(prop, value);
+        }
+    })
+}
+
+let user = {};
+user = makeObservable(user);
+
+user.observe((key, value) => {
+    alert(`SET ${key}=${value}`);
+});
+
+user.name = "John"; // выводит: SET name=John
+
+// ! Eval
+// ? Eval-калькулятор
+// function evalCalc() {
+//     // let firstArg = prompt('value#1', '0');
+//     // let action = prompt('action', '+');
+//     // let secondArg = prompt('value#2', '0');
+//     // return eval(`${firstArg}${action}${secondArg}`)
+
+//     // ? or
+//     let expr = prompt("Введите арифметическое выражение:", '(10+10)/10*3');
+//     return eval(expr);
+// }
+
+// console.log(evalCalc());
+
+// ! Побитовые операторы
+// ? Побитовый оператор и значение
+
+// alert(5 ^ 0); // 5 
+// alert(0 ^ 5); // 5
+// alert(~~123); // 123
+
+// ? Проверка, целое ли число
+
+// function isInteger(num) {
+//     // if (num % 1 != 0) {
+//     //     return false
+//     // }
+//     // return true
+//     // ?or
+//     return (num ^ 0) === num;
+// }
+// alert(isInteger(1)); // true
+// alert(isInteger(1.5)); // false
+// alert(isInteger(-0.5)); // false
+
+// ? Симметричны ли операции ^, |, &?
+
+// (a ^ b) == (b ^ a);
+// (a & b) == (b & a);
+// (a | b) == (b | a);
+// The answer is "Yes"
+
+// ! Intl: интернационализация в JavaScript
+// ? Отсортируйте массив с буквой ё
+// let animals = ["тигр", "ёж", "енот", "ехидна", "АИСТ", "ЯК"];
+
+// let { compare } = new Intl.Collator();
+// animals.sort((a, b) => compare(a, b));
+// // or 
+// // animals.sort(compare);
+
+// alert(animals); // АИСТ,ёж,енот,ехидна,тигр,ЯК
+
+
